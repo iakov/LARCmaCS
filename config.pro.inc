@@ -17,9 +17,11 @@ else {
   SUFFIX_STR = $${RELEASE_SUFFIX}
 }
 
+CONFIG *= c++17
 SHARED_DIR = ../macsCommon
 LIB_DIR = ../lib
 DESTDIR = ../bin$${SUFFIX_STR}
+INCLUDEPATH += $$PWD/inc
 
 # ----------PERSONAL-----------
 #MATLAB_DIR = d:/Work)/MATLAB/R2012b_x86/extern/
