@@ -1,6 +1,6 @@
 #include "receiverWorker.h"
 #include <QtWidgets/QApplication>
-
+#include <QThread>
 ReceiverWorker::ReceiverWorker()
 {
 	mainalgisfree=true;
@@ -131,7 +131,7 @@ void ReceiverWorker::run()
 		}
 		} else {
 			// no messages...
-			Sleep(1);
+		QThread::msleep(1000);
 		}
 
 		if (clock()-timer_m>CLOCKS_PER_SEC) {

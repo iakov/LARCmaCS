@@ -1,10 +1,16 @@
 #include <sys/types.h>
-//#include <sys/socket.h>
+#ifdef LINUX
+#include <sys/socket.h>
+#include <netdb.h>
+#include <sys/ioctl.h>
+#include <unistd.h>
+int closesocket(int sock) { return close(sock); }
+#define ioctlsocket ioctl
+
+#endif
 //#include <sys/poll.h>
 
 #include <stdio.h>
-//#include <netdb.h>
-//#include <unistd.h>
 //#include <fcntl.h>
 
 #include "util.h"
@@ -82,13 +88,14 @@ void Address::print(FILE *out) const
 
 UDP::UDP()
 {
+#ifdef WINDOWS
   // Initialize Winsock
   int iResult;
   WSADATA wsaData;
   iResult = WSAStartup(MAKEWORD(2,2), &wsaData);
   if (iResult != 0)
     printf("WSAStartup failed: %d\n", iResult);
-
+#endif //WINDOWS
   fd = -1;
   close();
 }
@@ -96,7 +103,9 @@ UDP::UDP()
 UDP::~UDP()
 {
   close();
+#ifdef WINDOWS
   WSACleanup();
+#endif
 }
 
 bool UDP::open(int port, bool share_port_for_multicasting, bool multicast_include_localhost, bool blocking)
@@ -207,7 +216,7 @@ bool UDP::send(const void *data,int length,const Address &dest)
 int UDP::recv(void *data,int length,Address &src)
 {
   src.addr_len = sizeof(src.addr);
-  int len = recvfrom(fd,(char*)data,length,0,&src.addr,(int*)&src.addr_len);
+  int len = recvfrom(fd,(char*)data,length,0,&src.addr,&src.addr_len);
 
   if(len > 0){
     recv_packets++;
