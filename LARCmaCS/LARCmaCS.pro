@@ -19,6 +19,9 @@ UI_DIR = ../build/LARCmaCS/ui
 #where to place intermediate resource files
 RCC_DIR = ../build/LARCmaCS/resources
 
+
+#INCLUDEPATH += ../larcmacs-protobuf/include/
+
 unix {
   #add google protocol buffers
   LIBS += -lprotobuf

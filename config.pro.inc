@@ -1,7 +1,8 @@
 CONFIG -= warn_off
-CONFIG += debug_and_release build_all
+#CONFIG += debug_and_release build_all
 CONFIG += qt thread
 CONFIG += console
+CONFIG -= app_bundle
 
 DEBUG_SUFFIX        = 
 RELEASE_SUFFIX      = 
@@ -12,26 +13,25 @@ win32 {
 
 CONFIG(debug, debug|release) {
   SUFFIX_STR = $${DEBUG_SUFFIX}
-}
-else {
+} else {
   SUFFIX_STR = $${RELEASE_SUFFIX}
 }
 
-CONFIG *= c++17
+CONFIG *= c++14
 SHARED_DIR = ../macsCommon
 LIB_DIR = ../lib
 DESTDIR = ../bin$${SUFFIX_STR}
-INCLUDEPATH += $$PWD/inc
+#INCLUDEPATH += $$PWD/inc
 
 # ----------PERSONAL-----------
 #MATLAB_DIR = d:/Work)/MATLAB/R2012b_x86/extern/
-MATLAB_DIR = 'C:/Program Files (x86)/MATLAB/R2013b/extern/'
+#MATLAB_DIR = 'C:/Program Files (x86)/MATLAB/R2013b/extern/'
 # -----------------------------
 
 unix {
-  DEFINES+=UNIX
-  DEFINES+=LINUX
-  DEFINES+=_GNU_SOURCE
+#  DEFINES+=UNIX
+#  DEFINES+=LINUX
+#  DEFINES+=_GNU_SOURCE
 
 #profiling:
 #  CONFIG += debug
@@ -46,7 +46,7 @@ win32 {
   DEFINES += WIN32_LEAN_AND_MEAN
   DEFINES += NOMINMAX
 
-  INCLUDEPATH += ../inc
+# INCLUDEPATH += ../inc
 
   QMAKE_CXXFLAGS += /wd4250
   QMAKE_CXXFLAGS += /Fd$(IntDir)

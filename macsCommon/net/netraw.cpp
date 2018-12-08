@@ -1,5 +1,5 @@
 #include <sys/types.h>
-#ifdef LINUX
+#ifdef __linux__
 #include <sys/socket.h>
 #include <netdb.h>
 #include <sys/ioctl.h>
@@ -88,14 +88,14 @@ void Address::print(FILE *out) const
 
 UDP::UDP()
 {
-#ifdef WINDOWS
+#ifdef _WIN32
   // Initialize Winsock
   int iResult;
   WSADATA wsaData;
   iResult = WSAStartup(MAKEWORD(2,2), &wsaData);
   if (iResult != 0)
     printf("WSAStartup failed: %d\n", iResult);
-#endif //WINDOWS
+#endif //_WIN32
   fd = -1;
   close();
 }
@@ -103,7 +103,7 @@ UDP::UDP()
 UDP::~UDP()
 {
   close();
-#ifdef WINDOWS
+#ifdef _WIN32
   WSACleanup();
 #endif
 }

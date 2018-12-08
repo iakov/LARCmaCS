@@ -31,9 +31,9 @@
 
 #include <time.h>
 
-#ifdef LINUX
+#ifdef __linux__
 #  include <sys/time.h>
-#elif defined(WINDOWS)
+#elif defined(_WIN32)
 
 #include <windows.h>
 

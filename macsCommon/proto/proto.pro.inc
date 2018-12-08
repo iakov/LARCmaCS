@@ -1,7 +1,7 @@
 unix {
   #build the protocol buffer code
   #message(Compiling Protocol Buffer CPP Sources from .proto Files...)
-  system(env WINEPREFIX=$$PWD WINEARCH=win32 wine ./protoc.exe --cpp_out=$$PWD/cpp --proto_path=$$PWD $$PWD/*.proto):HAS_PROTOBUF = TRUE
+  system(protoc --cpp_out=$$PWD/cpp --proto_path=$$PWD $$PWD/*.proto):HAS_PROTOBUF = TRUE
 
   isEmpty(HAS_PROTOBUF) {
     error(Failure building proto-buffer sources. Is the google protocol buffer compiler 'protoc' installed?)
