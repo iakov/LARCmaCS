@@ -28,11 +28,10 @@ RCC_DIR = ../build/LARCmaCS/resources
 unix {
   #add google protocol buffers
   LIBS += -lprotobuf
-  MATLAB_LIB_DIR = $${MATLAB_DIR}/../bin/glnxa64
+  MATLAB_LIB_DIR = $${MATLAB_DIR}/bin/glnxa64
   LIBS += -L$${MATLAB_LIB_DIR} -leng -lmat -lmx
 
   QMAKE_LFLAGS += -Wl,-rpath=$$[QT_INSTALL_LIBS] -Wl,-rpath=$$MATLAB_LIB_DIR
-#  QMAKE_LFLAGS += -Wl,--disable-new-dtags
   #add opengl support
   LIBS += -lGL -lGLU
 
@@ -45,9 +44,9 @@ win32 {
   LIBS += -L$$PWD/../lib/ -llibprotobuf$${SUFFIX_STR} \
           -lws2_32
 
-  LIBS += -L$${MATLAB_DIR}/lib/win32/microsoft/ -llibeng \
-          -L$${MATLAB_DIR}/lib/win32/microsoft/ -llibmat \
-          -L$${MATLAB_DIR}/lib/win32/microsoft/ -llibmx
+  LIBS += -L$${MATLAB_DIR}/extern/lib/win32/microsoft/ -llibeng \
+          -L$${MATLAB_DIR}/extern/lib/win32/microsoft/ -llibmat \
+          -L$${MATLAB_DIR}/extern/lib/win32/microsoft/ -llibmx
 
 
 }
@@ -68,7 +67,7 @@ INCLUDEPATH += \
   $${SHARED_DIR}/proto/cpp \
   $${SHARED_DIR}/util \
   $${SHARED_DIR}/rfprotocol \
-  $${MATLAB_DIR}/include \
+  $${MATLAB_DIR}/extern/include \
   $${SHARED_DIR}/vartypes
 
 SOURCES += main.cpp\

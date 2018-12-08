@@ -24,10 +24,10 @@ DESTDIR = ../bin$${SUFFIX_STR}
 #INCLUDEPATH += $$PWD/inc
 
 # ----------PERSONAL-----------
-#MATLAB_DIR = d:/Work)/MATLAB/R2012b_x86/extern/
-#MATLAB_DIR = 'C:/Program Files (x86)/MATLAB/R2013b/extern/'
+#MATLAB_DIR = d:/Work)/MATLAB/R2012b_x86/
+#MATLAB_DIR = 'C:/Program Files (x86)/MATLAB/R2013b/'
 # -----------------------------
-unix:MATLAB_DIR = /usr/local/MATLAB/R2018a/extern/
+unix:MATLAB_DIR = /usr/local/MATLAB/R2018a/
 
 
 unix {
