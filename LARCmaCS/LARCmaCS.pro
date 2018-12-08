@@ -25,9 +25,16 @@ RCC_DIR = ../build/LARCmaCS/resources
 unix {
   #add google protocol buffers
   LIBS += -lprotobuf
+  MATLAB_LIB_DIR = $${MATLAB_DIR}/../bin/glnxa64
+  LIBS += -L$${MATLAB_LIB_DIR} -leng -lmat -lmx
+
+  QMAKE_LFLAGS += -Wl,-rpath-link=$$MATLAB_LIB_DIR
 
   #add opengl support
   LIBS += -lGL -lGLU
+
+  #workaround for harfbuzz missing FT_Get_Var_Blend_Coordinates on link
+  LIBS += -lfreetype
 }
 
 win32 {
