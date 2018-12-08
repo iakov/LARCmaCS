@@ -1,9 +1,9 @@
 #pragma once
-#ifdef WINDOWS
+#ifdef __WIN32
 #include <winsock2.h>
 //#include <ws2tcpip.h>
 typedef ULONG in_addr_t;
-#elif defined(LINUX)
+#elif defined(__linux__)
 #include <sys/types.h>
 #  include <sys/socket.h>
 #  include <netinet/in.h>
