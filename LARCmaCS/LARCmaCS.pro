@@ -28,8 +28,8 @@ unix {
   MATLAB_LIB_DIR = $${MATLAB_DIR}/../bin/glnxa64
   LIBS += -L$${MATLAB_LIB_DIR} -leng -lmat -lmx
 
-  QMAKE_LFLAGS += -Wl,-rpath-link=$$MATLAB_LIB_DIR
-
+  QMAKE_LFLAGS += -Wl,-rpath=$$[QT_INSTALL_LIBS] -Wl,-rpath=$$MATLAB_LIB_DIR
+#  QMAKE_LFLAGS += -Wl,--disable-new-dtags
   #add opengl support
   LIBS += -lGL -lGLU
 
