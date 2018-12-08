@@ -4,6 +4,9 @@
 #
 #-------------------------------------------------
 
+
+# use from command line:qmake -r CONFIG+=debug  CONFIG+=sanitize_thread
+CONFIG *= sanitizer sanitize_undefined sanitize_leak sanitize_address
 #read the global configuration file
 include( ../config.pro.inc )
 
