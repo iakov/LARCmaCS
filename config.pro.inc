@@ -29,6 +29,7 @@ DESTDIR = ../bin$${SUFFIX_STR}
 # -----------------------------
 unix:MATLAB_DIR = /usr/local/MATLAB/R2018a/
 
+gcc { QMAKE_CXXFLAGS += -g }
 
 unix {
 #  DEFINES+=UNIX

@@ -4,9 +4,11 @@
 #
 #-------------------------------------------------
 
+!CONFIG(no-sanitizers) {
+  # use from command line:qmake -r CONFIG+=debug  CONFIG+=sanitize_thread
+  CONFIG *= sanitizer sanitize_undefined sanitize_leak sanitize_address
+}
 
-# use from command line:qmake -r CONFIG+=debug  CONFIG+=sanitize_thread
-CONFIG *= sanitizer sanitize_undefined sanitize_leak sanitize_address
 #read the global configuration file
 include( ../config.pro.inc )
 
@@ -36,7 +38,7 @@ unix {
   LIBS += -lGL -lGLU
 
   #workaround for harfbuzz missing FT_Get_Var_Blend_Coordinates on link
-  LIBS += -lfreetype
+#  LIBS += -lfreetype
 }
 
 win32 {
