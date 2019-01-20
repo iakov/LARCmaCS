@@ -27,12 +27,18 @@ msvc:amd64:  PROTO_DIR = $${VCPKG_DIR}/installed/x64-windows
 msvc {
   LIBS += -L$${PROTO_DIR}/$${PREFIX_STR}lib/ -llibprotobuf$${SUFFIX_STR}
   PROTOC_DIR = $${PROTO_DIR}/tools/protobuf/
-  DLLS += $$PROTO_DIR/$${PREFIX_STR}bin/libprotobuf$${SUFFIX_STR}.dll
+#  DLLS += $$PROTO_DIR/$${PREFIX_STR}bin/libprotobuf$${SUFFIX_STR}.dll
+  INCLUDEPATH += $${PROTO_DIR}/include
+  amd64:  PROTO_DIR = $${VCPKG_DIR}/installed/x64-windows
+  else: PROTO_DIR = $${VCPKG_DIR}/installed/x86-windows
 }
 
-INCLUDEPATH += $${PROTO_DIR}/include
+linux | mingw {
+  CONFIG *= link_pkgconfig
+  PKGCONFIG *= protobuf
+}
+
 PROTO_GENERATED_DIR = $$PWD/generated/
-INCLUDEPATH += $$PROTO_GENERATED_DIR
 
 old_ssl: PROTOS = $$files($$PWD/ssl-2009/*.proto)
 !old_ssl: PROTOS = $$files($$PWD/ssl-2018/*.proto)

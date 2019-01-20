@@ -23,7 +23,10 @@ protobuf_decl.input = PROTOS
 protobuf_decl.output = $${PROTO_GENERATED_DIR}/${QMAKE_FILE_BASE}.pb.h
 protobuf_decl.CONFIG += explicit_dependencies no_link target_predeps
 protobuf_decl.depends = ${QMAKE_FILE_IN}
-protobuf_decl.commands = $$shell_path($${PROTOC_DIR}protoc) --cpp_out=$$shell_path$${PROTO_GENERATED_DIR} --proto_path=${QMAKE_FILE_IN_PATH} ${QMAKE_FILE_BASE}.proto
+protobuf_decl.commands = $$shell_path($${PROTOC_DIR}protoc) \
+                              --cpp_out=$$shell_path($${PROTO_GENERATED_DIR}) \
+                              --proto_path=$$shell_path(${QMAKE_FILE_IN_PATH}) \
+                                ${QMAKE_FILE_BASE}.proto
 #protobuf_decl.commands = $${PROTOC_DIR}protoc --cpp_out=$${PROTO_GENERATED_DIR} --proto_path=$${PROTO_GENERATED_DIR}/.. ${QMAKE_FILE_BASE}.proto
 
 protobuf_decl.variable_out = GENERATED_FILES
@@ -38,4 +41,6 @@ protobuf_decl.CONFIG += explicit_dependencies no_link target_predeps
 protobuf_impl.commands = $$escape_expand(\n)
 protobuf_impl.variable_out = GENERATED_SOURCES
 QMAKE_EXTRA_COMPILERS += protobuf_impl
+
+INCLUDEPATH += $$PROTO_GENERATED_DIR
 
