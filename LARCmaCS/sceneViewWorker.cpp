@@ -25,6 +25,6 @@ void SceneViewWorker::run()
         emit updateView();
         //emit updateRobots();
         QApplication::processEvents();
-        Sleep(1);
+	 QThread::msleep(1000);
     }
 }

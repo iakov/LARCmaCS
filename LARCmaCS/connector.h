@@ -15,7 +15,7 @@
 
 using std::map;
 using std::vector;
-#include <Set>
+//#include <Set>
 
 struct Connector : QObject
 {
