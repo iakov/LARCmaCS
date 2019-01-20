@@ -19,14 +19,25 @@ INCLUDEPATH += $${SHARED_DIR}/vartypes
 win32 {
   #add libs
   LIBS += -lws2_32
-  LIBS += -L$${MATLAB_DIR}/lib/win$${BIT}/microsoft/ -llibeng \
-		  -L$${MATLAB_DIR}/lib/win$${BIT}/microsoft/ -llibmat \
-		  -L$${MATLAB_DIR}/lib/win$${BIT}/microsoft/ -llibmx
+  MATLAB_LIB_DIR = $${MATLAB_DIR}/lib/win$${BIT}/microsoft/
+  LIBS += -llibeng  -llibmat  -llibmx
 }
 
-QT += core gui network
+unix {
+  MATLAB_LIB_DIR = $${MATLAB_DIR}/bin/glnxa64
+  LIBS += -leng -lmat -lmx
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+  QMAKE_LFLAGS += -Wl,-rpath=$$[QT_INSTALL_LIBS] -Wl,-rpath=$$MATLAB_LIB_DIR
+  #add opengl support
+  #  LIBS += -lGL -lGLU
+
+  #workaround for harfbuzz missing FT_Get_Var_Blend_Coordinates on link
+  LIBS += -lfreetype
+}
+
+LIBS += -L$${MATLAB_LIB_DIR}
+
+QT += core gui network widgets
 
 TARGET = LARCmaCS
 TEMPLATE = app
@@ -37,6 +48,8 @@ INCLUDEPATH += \
   $${SHARED_DIR}/util \
   $${SHARED_DIR}/rfprotocol \
   $${MATLAB_DIR}/include \
+
+linux: INCLUDEPATH += $${MATLAB_DIR}/extern/include
 
 SOURCES +=  \
   $${SHARED_DIR}/net/netraw.cpp \
