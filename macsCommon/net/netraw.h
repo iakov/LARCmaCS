@@ -1,7 +1,7 @@
 #pragma once
-#ifdef __WIN32
+#ifdef _WIN32
 #  include <winsock2.h>
-//#include <ws2tcpip.h>
+#  include <ws2tcpip.h>
 typedef ULONG in_addr_t;
 #elif defined(__linux__)
 #  include <sys/types.h>
