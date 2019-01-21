@@ -31,17 +31,18 @@
 
 #include <time.h>
 
-#ifdef __linux__
+#ifdef __GNUC__
 #  include <sys/time.h>
-#elif defined(_WIN32)
+#elif defined(_MSC_VER)
 
-#include <windows.h>
+#include <Windows.h>
+#include <WinSock2.h>
 
-
-struct timeval {
+/*struct timeval {
   long    tv_sec;         // seconds
   long    tv_usec;        // and microseconds
 };
+*/
 
 inline int gettimeofday(struct timeval* tp, void* tzp)
 {
@@ -54,7 +55,7 @@ inline int gettimeofday(struct timeval* tp, void* tzp)
   /* 0 indicates that the call succeeded. */
   return 0;
 }
-#endif /* WINDOWS */
+#endif /* MSVC */
 /*!
   \class Timer
   \brief a basic timer class

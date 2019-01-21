@@ -25,12 +25,12 @@ mingw {
 msvc:!amd64: PROTO_DIR = $${VCPKG_DIR}/installed/x86-windows
 msvc:amd64:  PROTO_DIR = $${VCPKG_DIR}/installed/x64-windows
 msvc {
-  LIBS += -L$${PROTO_DIR}/$${PREFIX_STR}lib/ -llibprotobuf$${SUFFIX_STR}
-  PROTOC_DIR = $${PROTO_DIR}/tools/protobuf/
 #  DLLS += $$PROTO_DIR/$${PREFIX_STR}bin/libprotobuf$${SUFFIX_STR}.dll
-  INCLUDEPATH += $${PROTO_DIR}/include
   amd64:  PROTO_DIR = $${VCPKG_DIR}/installed/x64-windows
   else: PROTO_DIR = $${VCPKG_DIR}/installed/x86-windows
+  INCLUDEPATH += $${PROTO_DIR}/include
+  LIBS += -L$${PROTO_DIR}/$${PREFIX_STR}lib/ -llibprotobuf$${SUFFIX_STR}
+  PROTOC_DIR = $${PROTO_DIR}/tools/protobuf/
 }
 
 linux | mingw {
