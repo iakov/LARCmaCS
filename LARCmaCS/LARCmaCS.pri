@@ -25,11 +25,8 @@ win32 {
 
 unix {
   MATLAB_LIB_DIR = $${MATLAB_DIR}/bin/glnxa64
+  QMAKE_LINK += -Wl,-rpath-link=$${MATLAB_LIB_DIR}
   LIBS += -leng -lmat -lmx
-
-  QMAKE_LFLAGS += -Wl,-rpath=$$[QT_INSTALL_LIBS] -Wl,-rpath=$$MATLAB_LIB_DIR
-  #add opengl support
-  #  LIBS += -lGL -lGLU
 
   #workaround for harfbuzz missing FT_Get_Var_Blend_Coordinates on link
   LIBS += -lfreetype
