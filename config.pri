@@ -8,25 +8,24 @@ CONFIG += console
 #PROTOC_VER=$$system($${PROTOC_BIN_DIR}protoc --version)
 #message("Compiler:$$QMAKE_CXX from $$(PATH) with protoc $$PROTOC_VER")
 !contains(QT_ARCH, i386):CONFIG += amd64
-mingw {
+win32: mingw {
   amd64 { message(MINGW64) }
   else  { message(MINGW32) }
-} else: msvc {
+} else: win32: msvc {
   amd64 { message(MSVC64) }
   else  { message(MSVC32) }
-} else  {
+} else: unix: linux {
+  message { LINUX }
+} else {
   message(OTHER)
   error($$CONFIG)
 }
 
-DEBUG_SUFFIX =
-RELEASE_SUFFIX =
-win32 {
-  DEBUG_SUFFIX = d
-  DEBUG_PREFIX = debug/
-  !amd64: BIT = 32
-  amd64: BIT = 64
-}
+DEBUG_SUFFIX = d
+DEBUG_PREFIX = debug/
+
+amd64: BIT = 64
+else:  BIT = 32
 
 CONFIG(debug, debug|release) {
   SUFFIX_STR = $${DEBUG_SUFFIX}
@@ -38,12 +37,6 @@ else {
 }
 
 DESTDIR = bin$${SUFFIX_STR}
-
-unix {
-  DEFINES += UNIX
-  DEFINES += LINUX
-  DEFINES += _GNU_SOURCE
-}
 
 win32:msvc {
   DEFINES += _CRT_SECURE_NO_WARNINGS

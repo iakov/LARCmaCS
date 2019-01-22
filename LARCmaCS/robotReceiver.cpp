@@ -14,7 +14,7 @@
 
 #include <QtNetwork>
 
-#include "robotreceiver.h"
+#include "robotReceiver.h"
 
 RobotReceiver::RobotReceiver(): groupAddress4(QStringLiteral("192.168.1.255"))
 {

@@ -15,24 +15,24 @@
 
 using std::map;
 using std::vector;
-#include <Set>
+//#include <Set>
 
 struct Connector : QObject
 {
-	Q_OBJECT
+    Q_OBJECT
 
 public:
-	ConnectorWorker worker;
-	QThread thread;
+    ConnectorWorker worker;
+    QThread thread;
 
-	explicit Connector();
-	~Connector();
+    explicit Connector();
+    ~Connector();
 
-	void init();
-	void start();
-	void stop();
+    void init();
+    void start();
+    void stop();
 
 signals:
-	void wstart();
-	void wstop();
+    void wstart();
+    void wstop();
 };
