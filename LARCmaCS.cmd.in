@@ -1,2 +1,2 @@
-@PATH='C:\Windows\System32;$${OTHER_BIN};$${MATLAB_BIN}'
+@PATH='C:\Windows\System32$${APPEND_PATH}'
 @%~dp0\LARCmaCS.exe
