@@ -14,19 +14,6 @@ SHARED_DIR = macsCommon
 
 include (LARCmaCS/LARCmaCS.pri)
 
-#Need this???
-#where to place built objects
-OBJECTS_DIR = build/LARCmaCS/obj$${SUFFIX_STR}
-
-#where to place temporary moc sources
-MOC_DIR = build/LARCmaCS/moc
-
-#where to place auto-generated UI files
-UI_DIR = build/LARCmaCS/ui
-
-#where to place intermediate resource files
-RCC_DIR = build/LARCmaCS/resources
-
 defineReplace(fullSystemPath) {
 	return($$system_quote($$system_path($$clean_path($$absolute_path($$1)))))
 }

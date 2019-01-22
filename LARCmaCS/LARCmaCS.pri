@@ -25,7 +25,7 @@ win32 {
 
 unix {
   MATLAB_LIB_DIR = $${MATLAB_DIR}/bin/glnxa64
-  QMAKE_LINK += -Wl,-rpath-link=$${MATLAB_LIB_DIR}
+  QMAKE_RPATHLINKDIR+=$${MATLAB_LIB_DIR}
   LIBS += -leng -lmat -lmx
 
   #workaround for harfbuzz missing FT_Get_Var_Blend_Coordinates on link

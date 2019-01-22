@@ -3,6 +3,12 @@ CONFIG -= debug_and_release debug_and_release_target
 CONFIG += qt thread
 CONFIG += console
 
+CONFIG += object_parallel_to_source
+LARCMACS_HIDDEN_BUILD=build
+OBJECTS_DIR=$${LARCMACS_HIDDEN_BUILD}/objs
+MOC_DIR=$${LARCMACS_HIDDEN_BUILD}/mocs
+UI_DIR=$${LARCMACS_HIDDEN_BUILD}/uics
+
 
 #win32:!mingw {PROTOC_BIN_DIR=$${VCPKG_DIR}/bin/}
 #PROTOC_VER=$$system($${PROTOC_BIN_DIR}protoc --version)
