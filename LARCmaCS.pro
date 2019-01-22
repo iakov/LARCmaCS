@@ -53,4 +53,9 @@ copyToDestdir($$INIT_FILES)
 MATLAB_BIN = $${MATLAB_DIR}\..\bin\win$$BIT
 msvc: OTHER_BIN = '$$[QT_INSTALL_BINS];$${PROTO_DIR}/$${PREFIX_STR}bin/'
 mingw: OTHER_BIN = '$${MSYS_DIR}\mingw$${BIT}\bin'
-win32: QMAKE_SUBSTITUTES += LARCmaCS.cmd.in
+
+win32 {
+	LARCMACS_RUNNER = LARCmaCS.cmd
+	QMAKE_POST_LINK += $$QMAKE_MOVE $$shell_path($$LARCMACS_RUNNER) $$shell_path($$DESTDIR/)
+	QMAKE_SUBSTITUTES += $${LARCMACS_RUNNER}.in
+}
