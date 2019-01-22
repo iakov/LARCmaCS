@@ -1,3 +1,6 @@
-#!/usr/bin/env -i /bin/sh
-LD_LIBRARY_PATH=$${LARCMACS_LD_LIBRARY_PATH}
-exec $dirname($(readlink -f $0))/$${TARGET} $*
+#!/bin/sh
+exec /usr/bin/env - \
+	LD_LIBRARY_PATH=$${LARCMACS_LD_LIBRARY_PATH} \
+	XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR \
+	DISPLAY=$DISPLAY \
+ $(dirname $(readlink -f $0))/$${TARGET} $*

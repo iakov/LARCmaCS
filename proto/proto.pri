@@ -30,7 +30,7 @@ linux | mingw {
   PKGCONFIG *= protobuf
 }
 
-PROTO_GENERATED_DIR = $$PWD/generated/
+PROTO_GENERATED_DIR = proto/generated/
 
 old_ssl: PROTOS = $$files($$PWD/ssl-2009/*.proto)
 !old_ssl: PROTOS = $$files($$PWD/ssl-2018/*.proto)
