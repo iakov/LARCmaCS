@@ -53,18 +53,22 @@ INIT_FILES = \
 copyToDestdir($$INIT_FILES)
 
 win32 {
-	APPEND_PATH = ";$$fullSystemPath($${MATLAB_DIR}/../bin/win$$BIT);$$fullSystemPath($$[QT_INSTALL_BINS])"
-	msvc: APPEND_PATH = "${APPEND_PATH};$$fullSystemPath($${PROTO_DIR}/$${PREFIX_STR}bin/)"
-
 	LARCMACS_RUNNER = LARCmaCS.cmd
-	QMAKE_SUBSTITUTES += $${LARCMACS_RUNNER}.in
+
+	APPEND_PATH = $$fullSystemPath($${MATLAB_DIR}/../bin/win$$BIT)
+	APPEND_PATH += $$fullSystemPath($$[QT_INSTALL_BINS])
+	msvc: APPEND_PATH += $$fullSystemPath($${PROTO_DIR}/$${PREFIX_STR}bin/)
+	APPEND_PATH = $$join(APPEND_PATH, ; , ;)
+
 } else: linux {
 	LARCMACS_RUNNER = LARCmaCS.sh
 	LARCMACS_LD_LIBRARY_PATH=$$[QT_INSTALL_LIBS]:$$fullSystemPath($$MATLAB_LIB_DIR)
-	QMAKE_SUBSTITUTES += $${LARCMACS_RUNNER}.in
 }
 
 !isEmpty(LARCMACS_RUNNER) {
-	$${LARCMACS_RUNNER}.in.input=$${LARCMACS_RUNNER}.in
-	$${LARCMACS_RUNNER}.in.output=$$DESTDIR/$${LARCMACS_RUNNER}
+	$${LARCMACS_RUNNER}.in.input=$$fullSystemPath($$PWD/$${LARCMACS_RUNNER}.in)
+	$${LARCMACS_RUNNER}.in.output=$$fullSystemPath($$OUT_PWD/$$DESTDIR/$${LARCMACS_RUNNER})
+	#copy access/executable attributes from template .in file
+	linux:QMAKE_POST_LINK += chmod --reference=$$shell_path($$eval($${LARCMACS_RUNNER}.in.input)) $$shell_path($$eval($${LARCMACS_RUNNER}.in.output))
+	QMAKE_SUBSTITUTES += $${LARCMACS_RUNNER}.in
 }
