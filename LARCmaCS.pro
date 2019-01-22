@@ -27,6 +27,10 @@ UI_DIR = build/LARCmaCS/ui
 #where to place intermediate resource files
 RCC_DIR = build/LARCmaCS/resources
 
+defineReplace(fullSystemPath) {
+	return($$system_quote($$system_path($$clean_path($$absolute_path($$1)))))
+}
+
 defineTest(copyToDestdir) {
 	files = $$1
 
@@ -50,11 +54,10 @@ INIT_FILES = \
 
 copyToDestdir($$INIT_FILES)
 
-MATLAB_BIN = $${MATLAB_DIR}\..\bin\win$$BIT
-msvc: OTHER_BIN = '$$[QT_INSTALL_BINS];$${PROTO_DIR}/$${PREFIX_STR}bin/'
-mingw: OTHER_BIN = '$${MSYS_DIR}\mingw$${BIT}\bin'
-
 win32 {
+	APPEND_PATH = ";$$fullSystemPath($${MATLAB_DIR}/../bin/win$$BIT);$$fullSystemPath($$[QT_INSTALL_BINS])"
+	msvc: APPEND_PATH = "${APPEND_PATH};$$fullSystemPath($${PROTO_DIR}/$${PREFIX_STR}bin/)"
+
 	LARCMACS_RUNNER = LARCmaCS.cmd
 	QMAKE_POST_LINK += $$QMAKE_MOVE $$shell_path($$LARCMACS_RUNNER) $$shell_path($$DESTDIR/)
 	QMAKE_SUBSTITUTES += $${LARCMACS_RUNNER}.in
