@@ -1,6 +1,7 @@
 #!/usr/bin/tclsh
 
 # Copyright 2013-2014 Vladimir Nazarenko, Cybertech Labs Ltd.
+# Copyright 2018-2019 Iakov Kirilenko, Cybertech Labs Ltd.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,7 +18,7 @@
 proc getFiles { folder } {
   set listOfFiles ""
 
-  foreach excludeFolder [list *inc* *larcmacs-protobuf* *macsCommon*] {
+  foreach excludeFolder [list *build* *proto* *macsCommon*] {
       if {[string match $excludeFolder $folder] == 1} {
           return ""
       }
