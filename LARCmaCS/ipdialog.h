@@ -3,10 +3,7 @@
 #include <QDialog>
 #include "connector.h"
 #include "receiver.h"
-
-namespace Ui {
-	class IpDialog;
-}
+#include "ui_ipdialog.h"
 
 class IpDialog : public QDialog
 {
@@ -14,14 +11,13 @@ class IpDialog : public QDialog
 
 public:
 	explicit IpDialog(ConnectorWorker &worker, QWidget *parent = nullptr);
-	~IpDialog();
 
 private slots:
 	void on_buttonBox_accepted();
 	void on_buttonBox_rejected();
 
 private:
-	Ui::IpDialog *ui;
+	Ui::IpDialog ui;
 	Receiver receiver;
 	Connector connector;
 

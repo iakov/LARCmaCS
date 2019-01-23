@@ -5,10 +5,9 @@
 #include <QTextStream>
 
 Reference::Reference(QWidget *parent) :
-	QWidget(parent),
-	ui(new Ui::Help)
+	QWidget(parent)
 {
-	ui->setupUi(this);
+	ui.setupUi(this);
 
 	QFile file(QCoreApplication::applicationDirPath() + "\\help.html");
 
@@ -17,10 +16,5 @@ Reference::Reference(QWidget *parent) :
 	}
 
 	QTextStream in(&file);
-	ui->textBrowser->setText(in.readAll());
-}
-
-Reference::~Reference()
-{
-	delete ui;
+	ui.textBrowser->setText(in.readAll());
 }

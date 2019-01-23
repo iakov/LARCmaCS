@@ -10,13 +10,8 @@
 #include "ipdialog.h"
 #include "reference.h"
 #include "robotReceiver.h"
-
+#include "ui_larcmacs.h"
 #define NUM_CONTROL_ROBOTS 12
-
-namespace Ui
-{
-	class LARCmaCS;
-}
 
 class LARCmaCS : public QWidget
 {
@@ -38,7 +33,7 @@ protected:
 	Connector connector;
 
 private:
-	Ui::LARCmaCS *ui;
+	Ui::LARCmaCS ui;
 	float drawscale;
 	qreal sizescene;
 	QString wifiaddrdata[NUM_CONTROL_ROBOTS];
