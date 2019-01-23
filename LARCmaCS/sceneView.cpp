@@ -20,7 +20,9 @@ void SceneView::init()
 	cout << "sceneView init ok" << endl;
 	connect(this, SIGNAL(wstart()), &worker, SLOT(start()));
 	connect(this, SIGNAL(wstop()), &worker, SLOT(stop()));
+#if TODO_IAKOV
 	connect(&thread, SIGNAL(finished()), &worker, SLOT(deleteLater()));
+#endif
 }
 
 void SceneView::start()

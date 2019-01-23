@@ -10,10 +10,10 @@ LARCmaCS::LARCmaCS(QWidget *parent) :
 	QWidget(parent),
 	scalingRequested(true),
 	sizescene(10),
-	drawscale(1)
+	drawscale(1),
+	fieldscene(new FieldScene(this))
 {
 	ui.setupUi(this);
-	fieldscene = new FieldScene();
 	ui.fieldView->setScene(fieldscene);
 	scaleView(8);
 	macsArray = new QString[12];
@@ -227,11 +227,10 @@ void LARCmaCS::on_pushButton_SetupIP_clicked()
 	IpDialog *ipDialog = new IpDialog(connector.worker, this);
 	ipDialog->setWindowModality(Qt::WindowModality::WindowModal);
 	ipDialog->open();
-	qDebug() << connector.worker.numIP;
 }
 
 void LARCmaCS::on_but_reference_clicked()
 {
-	Reference *refWindow = new Reference();
+	Reference *refWindow = new Reference(this);
 	refWindow->show();
 }

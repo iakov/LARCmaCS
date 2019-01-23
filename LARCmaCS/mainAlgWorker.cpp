@@ -4,7 +4,7 @@
 #include <fstream>
 #include "QDebug"
 #include "message.h"
-
+using namespace std;
 int initConfig(RCConfig *config){
 	ifstream configFile;
 	string line;
@@ -45,9 +45,7 @@ int initConfig(RCConfig *config){
 					 << endl << "It will be truncated up to 16 characters." << endl;
 				fom.resize(16);
 			}
-			char *str = new char[fom.length() + 1];
-			strcpy(str, fom.c_str());
-			config->file_of_matlab = str;
+			config->file_of_matlab = fom;
 		}
 
 		if(line.find("rfclient.RULE_AMOUNT") != string::npos){
@@ -71,7 +69,9 @@ int initConfig(RCConfig *config){
 	return 0;
 }
 
-MainAlgWorker::MainAlgWorker()
+MainAlgWorker::MainAlgWorker():
+	fmldata(RCConfig()),
+	client(this)
 {
 	timer_s=0;
 	timer_m=clock();
@@ -132,7 +132,7 @@ void MainAlgWorker::run(PacketSSL packetssl)
 	engPutVariable(fmldata.ep, "Yellows", fmldata.Yellow);
 	engPutVariable(fmldata.ep, "ballInside", fmldata.ballInside);
 
-	engEvalString(fmldata.ep, fmldata.config.file_of_matlab);
+	engEvalString(fmldata.ep, fmldata.config.file_of_matlab.c_str());
 
 // Забираем Rules и очищаем его в воркспейсе
 
@@ -157,11 +157,12 @@ void MainAlgWorker::run(PacketSSL packetssl)
 			newmess[j]=ruleArray[j * fmldata.config.RULE_AMOUNT + i];
 		}
 		if (newmess[0]==1) {
+#if 0
 			char * newmessage=new char[100];
 			memcpy(newmessage,newmess,100);
 			if ((newmess[1]>=0) && (newmess[1]<=MAX_NUM_ROBOTS) && ((newmess[1]==0) || (Send2BT[newmess[1]-1]==true)))
 				emit sendToBTtransmitter(newmessage);
-
+#endif
 			Message msg;
 			msg.setKickVoltageLevel(12);
 			msg.setKickerChargeEnable(1);

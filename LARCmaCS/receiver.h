@@ -9,17 +9,12 @@
 #include "robocup_ssl_client.h"
 
 #include "receiverWorker.h"
-
-using namespace std;
-
-#include <time.h>       /* clock_t, clock(), CLOCKS_PER_SEC */
-
 struct Receiver : public QObject
 {
 	Q_OBJECT
 public:
-	ReceiverWorker worker;
 	QThread thread;
+	ReceiverWorker worker;
 
 	Receiver();
 	~Receiver();

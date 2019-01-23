@@ -31,11 +31,11 @@ private:
 	//balls
 	QVector < QVector<QGraphicsEllipseItem*> > ballItems;
 	//field
-	QPainterPath *field;
+	QPainterPath field;
 	QGraphicsPathItem *fieldItem;
 	//brushes and pens
-	QBrush *fieldBrush, *ballBrush;
-	QPen *fieldPen, *fieldLinePen, *ballPen;
+	QBrush fieldBrush, ballBrush;
+	QPen fieldPen, fieldLinePen, ballPen;
 	bool shutdownSoccerView;
 
 	void ConstructField();

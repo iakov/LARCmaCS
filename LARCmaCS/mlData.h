@@ -7,7 +7,7 @@
 typedef struct
 {
 	std::string	name;
-	const char *file_of_matlab;
+	std::string file_of_matlab;
 	int RULE_AMOUNT;
 	int RULE_LENGTH;
 	int BACK_AMOUNT;
@@ -16,10 +16,11 @@ typedef struct
 
 class MlData
 {
+	explicit MlData(const MlData&); // NO COPY CTOR!!! Old one was incorrect!
 public:
-	MlData(){}
-	MlData(RCConfig conf);
-	MlData(const MlData &data);
+	//MlData(){}
+	~MlData();
+	explicit MlData(const RCConfig &conf);
 
 	RCConfig config;
 

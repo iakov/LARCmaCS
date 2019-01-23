@@ -5,22 +5,19 @@
 #include <QUdpSocket>
 #include <QtCore>
 #include <QMap>
-
-using std::map;
+#include <map>
 
 struct ConnectorWorker : QObject
 {
 Q_OBJECT
 public:
 	ConnectorWorker(){}
-
 	int shutdownconnector;
-	char *curRuleArray;
 
 	QString filename;
 	QFile *ipFile;
 	QUdpSocket *udpSocket;
-	map<int const, QString> robotAddrMap;
+	std::map<int const, QString> robotAddrMap;
 	int connectedAllSocketsFlag;
 	QMap<int,QString> numIP;
 	QMap<QString,QString> macIP;
@@ -28,7 +25,7 @@ public:
 	QList<QString> macList;
 
 	int gotPacketsNum;
-	QTimer* timer;
+	//QTimer* timer;
 
 	int connectedSockets;
 	int connectedRobots;

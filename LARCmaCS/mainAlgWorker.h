@@ -4,11 +4,9 @@
 #include "packetSSL.h"
 #include "mlData.h"
 #include "client.h"
+#include <time.h>       /* clock_t, clock(), CLOCKS_PER_SEC */
 
 #define MAX_NUM_ROBOTS 12
-
-using namespace std;
-#include <time.h>       /* clock_t, clock(), CLOCKS_PER_SEC */
 
 struct MainAlgWorker : public QObject
 {
@@ -26,7 +24,9 @@ public:
 
 signals:
 	void sendToConnector(int N,QByteArray command);
+#if 0
 	void sendToBTtransmitter(char * message);
+#endif
 	void mainAlgFree();
 	void StatusMessage(QString message);
 	void UpdatePauseState(QString message);

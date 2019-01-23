@@ -22,8 +22,8 @@ struct Connector : QObject
 	Q_OBJECT
 
 public:
-	ConnectorWorker worker;
 	QThread thread;
+	ConnectorWorker worker;
 
 	explicit Connector();
 	~Connector();

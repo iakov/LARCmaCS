@@ -25,7 +25,9 @@ void MainAlg::init()
 	cout << "Init mainAlg ok" << endl;
 	connect(this, SIGNAL(wstart()), &worker, SLOT(start()));
 	connect(this, SIGNAL(wstop()), &worker, SLOT(stop()));
+#if TODO_IAKOV
 	connect(&thread, SIGNAL(finished()), &worker, SLOT(deleteLater()));
+#endif
 	//engEvalString(fmldata.ep,s.toUtf8().data());
 }
 

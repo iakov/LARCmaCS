@@ -1,7 +1,7 @@
 #include "mlData.h"
 #include <memory.h>
 
-MlData::MlData(RCConfig conf)
+MlData::MlData(const RCConfig &conf)
 {
 	config = conf;
 
@@ -15,32 +15,15 @@ MlData::MlData(RCConfig conf)
 	ballInside   = mxCreateDoubleScalar(0);
 }
 
-MlData::MlData(const MlData &dat)
-{
-	memset(&config, 0, sizeof(RCConfig));
-	memcpy(&config, &dat.config, sizeof(RCConfig));
-
-	Ball         = mxCreateDoubleMatrix(1, 3, mxREAL);
-	memcpy(Ball, &dat.Ball, sizeof(Ball));
-
-	Blue         = mxCreateDoubleMatrix(12, 4, mxREAL);
-	memcpy(Blue, &dat.Blue, sizeof(Blue));
-
-	Yellow       = mxCreateDoubleMatrix(12, 4, mxREAL);
-	memcpy(Yellow, &dat.Yellow, sizeof(Yellow));
-
-	Rule         = mxCreateDoubleMatrix(config.RULE_LENGTH, config.RULE_AMOUNT, mxREAL);
-	memcpy(Rule, &dat.Rule, sizeof(Rule));
-
-	Back_Params  = mxCreateDoubleMatrix(config.BACK_LENGTH, config.BACK_AMOUNT, mxREAL);
-	memcpy(Back_Params, &dat.Back_Params, sizeof(Back_Params));
-
-	Back_Amount  = mxCreateDoubleMatrix(1, 1, mxREAL);
-	memcpy(Back_Amount, &dat.Back_Amount, sizeof(Back_Amount));
-
-	Back_Length  = mxCreateDoubleMatrix(1, 1, mxREAL);
-	memcpy(Back_Length, &dat.Back_Length, sizeof(Back_Length));
-
-	ballInside   = mxCreateDoubleScalar(0);
-	memcpy(ballInside, &dat.ballInside, sizeof(ballInside));
+MlData::~MlData(){
+#if TODO_IAKOV
+	mxDestroyArray(Ball       );Ball       = nullptr;
+	mxDestroyArray(Blue       );Blue       = nullptr;
+	mxDestroyArray(Yellow     );Yellow     = nullptr;
+	mxDestroyArray(Rule       );Rule       = nullptr;
+	mxDestroyArray(Back_Params);Back_Params= nullptr;
+	mxDestroyArray(Back_Amount);Back_Amount= nullptr;
+	mxDestroyArray(Back_Length);Back_Length= nullptr;
+	mxDestroyArray(ballInside );ballInside = nullptr;
+#endif
 }

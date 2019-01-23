@@ -18,6 +18,7 @@ bool Client::initFromList(const QStringList &addrs)
 		qDebug() << "Connection to" << host_port;
 		s->connectToHost(host_port[0], host_port[1].toInt());
 		if (!s->waitForConnected()) {
+			delete s;
 			return false;
 		}
 		sockets.push_back(s);

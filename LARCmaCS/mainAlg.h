@@ -14,16 +14,14 @@
 
 #define MAX_NUM_ROBOTS 12
 
-using namespace std;
-#include <time.h>       /* clock_t, clock(), CLOCKS_PER_SEC */
 
 struct MainAlg : public QObject
 {
 	Q_OBJECT
 
 public:
-	MainAlgWorker worker;
 	QThread thread;
+	MainAlgWorker worker;
 
 	explicit MainAlg();
 	~MainAlg();
