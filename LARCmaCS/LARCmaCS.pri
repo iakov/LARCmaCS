@@ -19,20 +19,23 @@ INCLUDEPATH += $${SHARED_DIR}/vartypes
 win32 {
   #add libs
   LIBS += -lws2_32
+  MATLAB_INCLUDE_DIR=$${MATLAB_DIR}/include
   MATLAB_LIB_DIR = $${MATLAB_DIR}/lib/win$${BIT}/microsoft/
   LIBS += -llibeng  -llibmat  -llibmx
-}
-
-unix {
+} else: linux {
   MATLAB_LIB_DIR = $${MATLAB_DIR}/bin/glnxa64
   QMAKE_RPATHLINKDIR+=$${MATLAB_LIB_DIR}
   LIBS += -leng -lmat -lmx
 
   #workaround for harfbuzz missing FT_Get_Var_Blend_Coordinates on link
   LIBS += -lfreetype
+  MATLAB_INCLUDE_DIR=$${MATLAB_DIR}/extern/include
 }
 
+!exists($${MATLAB_INCLUDE_DIR}):error("$$MATLAB_INCLUDE_DIR not found missing!")
+
 LIBS += -L$${MATLAB_LIB_DIR}
+INCLUDEPATH += $${MATLAB_INCLUDE_DIR}
 
 QT += core gui network widgets
 
@@ -44,9 +47,7 @@ INCLUDEPATH += \
   $${SHARED_DIR}/net \
   $${SHARED_DIR}/util \
   $${SHARED_DIR}/rfprotocol \
-  $${MATLAB_DIR}/include \
 
-linux: INCLUDEPATH += $${MATLAB_DIR}/extern/include
 
 SOURCES +=  \
   $${SHARED_DIR}/net/netraw.cpp \

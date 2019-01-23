@@ -42,5 +42,10 @@ protobuf_impl.commands = $$escape_expand(\n)
 protobuf_impl.variable_out = GENERATED_SOURCES
 QMAKE_EXTRA_COMPILERS += protobuf_impl
 
+packagesExist(protobuf) {
+  CONFIG *= link_pkgconfig
+  PKGCONFIG *= protobuf
+}
+
 INCLUDEPATH += $$PROTO_GENERATED_DIR
 CONFIG *= c++11
