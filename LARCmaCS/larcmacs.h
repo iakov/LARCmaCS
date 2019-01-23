@@ -57,7 +57,6 @@ private slots:
 private slots:
 	//void on_pushButton_Pause_clicked();
 	void on_pushButton_SetMLdir_clicked();
-	void on_pushButton_RC_clicked();
 	void remcontrolsender(int l, int r,int k, int b, bool kickUp);
 	void on_checkBox_MlMaxFreq_stateChanged(int arg1);
 	void on_pushButton_RemoteControl_clicked();
@@ -65,6 +64,7 @@ private slots:
 	void on_but_reference_clicked();
 
 signals:
+	void updateGeometry();
 	void sendToConnectorRM(int N,QByteArray command);
 	void receiveMacArray(QString*);
 	void ChangeMaxPacketFrequencyMod(bool state);

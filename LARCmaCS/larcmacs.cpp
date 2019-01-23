@@ -31,8 +31,8 @@ LARCmaCS::LARCmaCS(QWidget *parent) :
 //    connect(&connector.worker,SIGNAL(allNeededRobotsEnabled()),&wifiform,SLOT(initEnded()));
 
 	// GUIS
-	connect(&connector.worker,SIGNAL(sendPortList(QStringList)),this,SLOT(displayPorts(QStringList)));
-	connect(this,SIGNAL(openPort(QString)),&connector.worker,SLOT(openPort(QString)));
+	//connect(&connector.worker,SIGNAL(sendPortList(QStringList)),this,SLOT(displayPorts(QStringList)));
+	//connect(this,SIGNAL(openPort(QString)),&connector.worker,SLOT(openPort(QString)));
 
 	//algorithm connect
 	connect(this, SIGNAL(MLEvalString(QString)),&mainalg.worker,SLOT(EvalString(QString)));
@@ -203,13 +203,6 @@ void LARCmaCS::on_pushButton_SetMLdir_clicked()
 		qDebug() << "New Matlab directory = " << s;
 		emit MLEvalString(s);
 	}
-}
-
-void LARCmaCS::on_pushButton_RC_clicked()
-{
-	remotecontol.hide();
-	remotecontol.show();
-	remotecontol.TimerStart();
 }
 
 void LARCmaCS::on_checkBox_MlMaxFreq_stateChanged(int arg1)
