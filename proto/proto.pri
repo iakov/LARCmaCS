@@ -25,11 +25,6 @@ msvc {
   PROTOC_DIR = $${PROTO_DIR}/tools/protobuf/
 }
 
-linux | mingw {
-  CONFIG *= link_pkgconfig
-  PKGCONFIG *= protobuf
-}
-
 PROTO_GENERATED_DIR = proto/generated/
 
 old_ssl: PROTOS = $$files($$PWD/ssl-2009/*.proto)

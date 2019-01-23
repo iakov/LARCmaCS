@@ -1,4 +1,10 @@
 include(config.pri)
+
+linux {
+	MATLAB_DIR=/usr/local/MATLAB/R2018a
+	!exists($$MATLAB_DIR):MATLAB_DIR=/usr/local/MATLAB/MATLAB_Runtime/v95
+}
+
 include(personal.pri)
 #check personal info
 msvc {
@@ -8,6 +14,9 @@ mingw {
   isEmpty(MSYS_DIR): error("To use MINGW you need to specify the path to MSYS_DIR!")
 }
 isEmpty(MATLAB_DIR): error("You need to specify the path to MATLAB_DIR!")
+!exists($$MATLAB_DIR): error("$$MATLAB_DIR does not exist!")
+
+
 include(proto/proto.pri)
 
 SHARED_DIR = macsCommon
