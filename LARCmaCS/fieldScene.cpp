@@ -81,7 +81,7 @@ void FieldScene::UpdateRobots(SSL_DetectionFrame &detection)
 			j++;
 		//    cout << "robot size " << robots.size() << endl;
 
-		if ( j+1>robots.size() )
+		if ( j >= robots.size() )
 			AddRobot ( new Robot ( x,y,orientation,team,id,detection.camera_id(),conf ) );
 
 		//cout << i << " " << id << " " << x << " " << y << " " << orientation << " " << conf << endl;
@@ -283,11 +283,11 @@ void FieldScene::ConstructField()
 		field->moveTo(- (field_length/(2*ksize)), -penalty_area_width/(2*ksize));
 		field->lineTo ( - ( field_length/(2*ksize)-penalty_area_depth/ksize ),-penalty_area_width/(2*ksize) );
 	} else {
-		for (int i = 0; i < field_lines.size(); i++) {
+		for (std::size_t i = 0; i < field_lines.size(); i++) {
 			field->moveTo(field_lines[i].p1().x() / ksize, field_lines[i].p1().y() / ksize);
 			field->lineTo(field_lines[i].p2().x() / ksize, field_lines[i].p2().y() / ksize);
 		}
-		for (int i = 0; i < field_arcs.size(); i++) {
+		for (std::size_t i = 0; i < field_arcs.size(); i++) {
 			double tmp;
 			if (field_arcs[i].a2() < field_arcs[i].a1()) {
 				tmp = 2 * M_PI + field_arcs[i].a2() - field_arcs[i].a1();

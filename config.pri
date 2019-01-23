@@ -63,8 +63,9 @@ win32:msvc {
   #QMAKE_CXXFLAGS_RELEASE += /Zi
   #QMAKE_LFLAGS_RELEASE += /DEBUG
   QMAKE_CXXFLAGS += /MP
-} else:mingw {
-  QMAKE_CXXFLAGS += -Wno-unused-parameter -Wno-format
+} else:gcc {
+  CONFIG += no_warn
+  QMAKE_CXXFLAGS += -Wall -Wextra -Werror -Wno-unused-parameter -Wno-format -Wno-reorder
 }
 
 old_ssl: DEFINES += OLD_SSL_PROTO
