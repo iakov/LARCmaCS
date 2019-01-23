@@ -43,4 +43,4 @@ protobuf_impl.variable_out = GENERATED_SOURCES
 QMAKE_EXTRA_COMPILERS += protobuf_impl
 
 INCLUDEPATH += $$PROTO_GENERATED_DIR
-
+CONFIG *= c++11
