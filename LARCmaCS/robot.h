@@ -17,7 +17,7 @@ public:
 	int id;                 //ID of the robot in its team
 	double x,y;
 	double conf;
-	int key;
+	unsigned key;
 	QString robotLabel;
 
 private:

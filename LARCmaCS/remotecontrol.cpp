@@ -73,7 +73,7 @@ void RemoteControl::keyReleaseEvent(QKeyEvent * key)
 
 void RemoteControl::RC_send(void)
 {
-	int L=0,R=0,S=0,K=0,B=0;
+	int L=0,R=0,K=0,B=0;
 
 	int xVel = 0, yVel = 0, r = 0;
 	bool kickUp = false;
