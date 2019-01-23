@@ -8,14 +8,13 @@
 
 LARCmaCS::LARCmaCS(QWidget *parent) :
 	QWidget(parent),
-	ui(new Ui::LARCmaCS),
 	scalingRequested(true),
 	sizescene(10),
 	drawscale(1)
 {
-	ui->setupUi(this);
+	ui.setupUi(this);
 	fieldscene = new FieldScene();
-	ui->fieldView->setScene(fieldscene);
+	ui.fieldView->setScene(fieldscene);
 	scaleView(8);
 	macsArray = new QString[12];
 
@@ -48,7 +47,7 @@ LARCmaCS::LARCmaCS(QWidget *parent) :
 
 	//gui connector
 	connect(&sceneview.worker, SIGNAL(updateView()), this, SLOT(updateView()));
-	connect(ui->sceneslider, SIGNAL(valueChanged(int)), this, SLOT(scaleView(int)));
+	connect(ui.sceneslider, SIGNAL(valueChanged(int)), this, SLOT(scaleView(int)));
 
 	//info GUI
 	connect(&mainalg.worker,SIGNAL(UpdatePauseState(QString)),this,SLOT(UpdatePauseState(QString)));
@@ -81,7 +80,7 @@ LARCmaCS::LARCmaCS(QWidget *parent) :
 
 void LARCmaCS::remcontrolsender(int l, int r,int k, int b, bool kickUp)
 {
-	QString ip = ui->lineEditRobotIp->text();
+	QString ip = ui.lineEditRobotIp->text();
 	Message data;
 	data.setSpeedX(l);
 	data.setSpeedY(r);
@@ -141,22 +140,21 @@ void LARCmaCS::fieldsceneUpdateField()
 
 LARCmaCS::~LARCmaCS()
 {
-	delete ui;
 }
 
 void LARCmaCS::UpdatePauseState(QString message)
 {
-	ui->label_Pause->setText(message);
+	ui.label_Pause->setText(message);
 }
 
 void LARCmaCS::UpdateSSLFPS(QString message)
 {
-	ui->label_SSL_FPS->setText(message);
+	ui.label_SSL_FPS->setText(message);
 }
 
 void LARCmaCS::UpdateStatusBar(QString message)
 {
-	ui->StatusLabel->setText(message);
+	ui.StatusLabel->setText(message);
 }
 
 void LARCmaCS::scaleView(int _sizescene)
@@ -164,13 +162,13 @@ void LARCmaCS::scaleView(int _sizescene)
 //    cout << _sizescene << "  " << sizescene;
 //    qreal scaleFactor = (drawScale-1) - (qreal)_scaleFactor/100;
 //    cout << scaleFactor << "  ";
-//    qreal factor = ui->view->matrix().scale ( scaleFactor, scaleFactor ).mapRect ( QRectF ( 0, 0, 1, 1 ) ).width();
+//    qreal factor = ui.view->matrix().scale ( scaleFactor, scaleFactor ).mapRect ( QRectF ( 0, 0, 1, 1 ) ).width();
 //    cout << factor << "  ";
 //    if ( factor > 0.07 && factor < 100.0 )
 //    drawscale = 1 - (float)(sizescene-_sizescene)/10;
 	drawscale = pow(0.9, _sizescene-sizescene);
 	sizescene = _sizescene;
-//    ui->view->wheelEvent();
+//    ui.view->wheelEvent();
 //    cout << " DS " << drawscale << endl;
 	scalingRequested = true;
 }
@@ -183,11 +181,11 @@ void LARCmaCS::updateView()
 //    return;
 //  }
 	if ( scalingRequested ) {
-		qreal factor = ui->fieldView->matrix().scale ( drawscale, drawscale ).mapRect ( QRectF ( 0, 0, 1, 1 ) ).width();
+		qreal factor = ui.fieldView->matrix().scale ( drawscale, drawscale ).mapRect ( QRectF ( 0, 0, 1, 1 ) ).width();
 		if ( factor > 0.07 && factor < 100.0 )
-			ui->fieldView->scale ( drawscale, drawscale );
+			ui.fieldView->scale ( drawscale, drawscale );
 		scalingRequested = false;
-		ui->fieldView->viewport()->update();
+		ui.fieldView->viewport()->update();
 	}
 }
 

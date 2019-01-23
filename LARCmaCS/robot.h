@@ -21,8 +21,8 @@ public:
 	QString robotLabel;
 
 private:
-	QBrush *brush;
-	QPen *pen, *idPen, *confPen;
+	QBrush brush;
+	QPen pen, idPen, confPen;
 	QPainterPath robotOutline, robotOutlineCircle, robotID;
 	QFont drawFont;
 
@@ -37,5 +37,4 @@ public:
 	Robot();
 	Robot ( double _x, double _y, double _orientation, int _teamID, int _id, int _key, double _conf );
 	void SetPose ( double _x, double _y, double _orientation, double _conf );
-	~Robot();
 };

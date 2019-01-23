@@ -2,11 +2,9 @@
 
 #include <QWidget>
 #include <QTimer>
-namespace Ui {
-	class RemoteControl;
-}
-
 #include <QKeyEvent>
+#include "ui_remotecontrol.h"
+
 class RemoteControl : public QWidget
 {
 	Q_OBJECT
@@ -15,7 +13,6 @@ class RemoteControl : public QWidget
 
 public:
 	explicit RemoteControl(QWidget *parent = 0);
-	~RemoteControl();
 private:
 	QTimer timer;
 	void keyPressEvent(QKeyEvent *key);
@@ -29,7 +26,7 @@ public slots:
 	void TimerStart();
 	void TimerStop();
 private:
-	Ui::RemoteControl *ui;
+	Ui::RemoteControl ui;
 signals:
 	void RC_control(int left,int right,int kick,int beep, bool kickUp);
 };

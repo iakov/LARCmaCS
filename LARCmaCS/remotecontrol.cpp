@@ -5,10 +5,9 @@
 
 #include <QDebug>
 RemoteControl::RemoteControl(QWidget *parent) :
-	QWidget(parent),
-	ui(new Ui::RemoteControl)
+	QWidget(parent)
 {
-	ui->setupUi(this);
+	ui.setupUi(this);
 	qDebug()<<"START REMOTE CONTROL";
 	connect(&timer,SIGNAL(timeout()),this,SLOT(RC_send()));
 	connect(this,SIGNAL(destroyed()),this,SLOT(TimerStop()));
@@ -33,11 +32,6 @@ void RemoteControl::TimerStop()
 		qDebug()<<"<RemContril>: Stop";
 		timer.stop();
 	}
-}
-
-RemoteControl::~RemoteControl()
-{
-	delete ui;
 }
 
 #define QT_KEY_SHIFT_NATIVE 16
@@ -149,7 +143,7 @@ void RemoteControl::RC_send(void)
 		if (abs(R)>100)
 			R=R/abs(R)*100;
 	}
-	ui->label_state->setText(" L=" +QString::number(L)+
+	ui.label_state->setText(" L=" +QString::number(L)+
 							 " R=" +QString::number(R)+
 							 " K=" +QString::number(K)+
 							 " B=" +QString::number(B));
