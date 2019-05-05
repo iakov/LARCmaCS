@@ -38,7 +38,7 @@ protobuf_impl.output = $${PROTO_GENERATED_DIR}/${QMAKE_FILE_BASE}.pb.cc
 protobuf_impl.depends = $${PROTO_GENERATED_DIR}/${QMAKE_FILE_BASE}.pb.h
 protobuf_impl.dependency_type = TYPE_C
 protobuf_decl.CONFIG += explicit_dependencies no_link target_predeps
-protobuf_impl.commands = $$escape_expand(\n)
+protobuf_impl.commands = $$escape_expand(\\n)
 protobuf_impl.variable_out = GENERATED_SOURCES
 QMAKE_EXTRA_COMPILERS += protobuf_impl
 

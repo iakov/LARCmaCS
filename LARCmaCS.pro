@@ -1,11 +1,11 @@
-include(config.pri)
-
+include($$PWD/config.pri)
 linux {
 	MATLAB_DIR=/usr/local/MATLAB/R2018a
 	!exists($$MATLAB_DIR):MATLAB_DIR=/usr/local/MATLAB/MATLAB_Runtime/v95
 }
 
-include(personal.pri)
+include($$PWD/personal.pri)
+
 #check personal info
 msvc {
   isEmpty(VCPKG_DIR): error("To use MSVC you need to specify the path to VCPKG_DIR!")
@@ -13,15 +13,15 @@ msvc {
 mingw {
   isEmpty(MSYS_DIR): error("To use MINGW you need to specify the path to MSYS_DIR!")
 }
+
 isEmpty(MATLAB_DIR): error("You need to specify the path to MATLAB_DIR!")
 !exists($$MATLAB_DIR): error("$$MATLAB_DIR does not exist!")
 
-
-include(proto/proto.pri)
+include($$PWD/proto/proto.pri)
 
 SHARED_DIR = macsCommon
 
-include (LARCmaCS/LARCmaCS.pri)
+include ($$PWD/LARCmaCS/LARCmaCS.pri)
 
 defineReplace(fullSystemPath) {
 	return($$system_quote($$system_path($$clean_path($$absolute_path($$1)))))

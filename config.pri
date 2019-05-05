@@ -3,8 +3,8 @@ CONFIG -= debug_and_release debug_and_release_target
 CONFIG += qt thread
 CONFIG += console
 
-CONFIG += object_parallel_to_source
-LARCMACS_HIDDEN_BUILD=build
+#CONFIG += object_parallel_to_source
+LARCMACS_HIDDEN_BUILD=$$OUT_PWD/build
 OBJECTS_DIR=$${LARCMACS_HIDDEN_BUILD}/objs
 MOC_DIR=$${LARCMACS_HIDDEN_BUILD}/mocs
 UI_DIR=$${LARCMACS_HIDDEN_BUILD}/uics
@@ -63,9 +63,17 @@ win32:msvc {
   #QMAKE_CXXFLAGS_RELEASE += /Zi
   #QMAKE_LFLAGS_RELEASE += /DEBUG
   QMAKE_CXXFLAGS += /MP
-} else:gcc {
+}
+
+gcc {
   CONFIG += no_warn
   QMAKE_CXXFLAGS += -Wall -Wextra -Werror -Wno-unused-parameter -Wno-format -Wno-reorder
 }
+
+unix {
+  QMAKE_CXX_FLAGS += -fsanitize=address,undefined
+  QMAKE_LFLAGS += -fsanitize=address,undefined
+}
+
 
 old_ssl: DEFINES += OLD_SSL_PROTO
